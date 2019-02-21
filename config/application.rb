@@ -29,5 +29,8 @@ module Githubstars
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Autoload files from /lib folder
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

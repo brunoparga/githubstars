@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  def home; end
+  def home
+    # visiting home cleans up the database of other users' repos
+    Repository.destroy_all
+    Tag.destroy_all
+  end
 
   def repos
     username = helpers.sanitize(params[:username]).strip
-    url = "https://api.github.com/users/#{username}/starred?sort=updated&direction=desc"
-    @repos =
-      JSON.parse(RestClient.get(url), symbolize_names: true)
-      .map { |repo| repo.slice(*%i[id name description html_url language]) }
+    @repos = GithubInteractor.fetch_starred(username)
+    @repos.each { |repo| Repository.create(repo) }
   end
 end

@@ -16,6 +16,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  # drivers for system tests
   config.before(:each, type: :system) do
     driven_by :rack_test
   end

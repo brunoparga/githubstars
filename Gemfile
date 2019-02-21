@@ -42,6 +42,8 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Enable system testing
   gem "capybara"
+  # Create objects for tests
+  gem "factory_bot_rails"
   # RSpec test framework
   gem "rspec-rails", "~> 3.8"
 end

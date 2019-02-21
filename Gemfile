@@ -44,6 +44,8 @@ group :development, :test do
   gem "capybara"
   # Create objects for tests
   gem "factory_bot_rails"
+  # Pry - very useful for debugging
+  gem "pry-byebug"
   # RSpec test framework
   gem "rspec-rails", "~> 3.8"
 end
@@ -57,6 +59,11 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 3.3.0"
+end
+
+group :test do
+  # Shoulda-matchers makes for easier tests
+  gem "shoulda-matchers"
 end
 
 

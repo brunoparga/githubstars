@@ -1,0 +1,5 @@
+<% @repos.each do |repo| %>
+  <p><%= link_to repo[:name], repo[:html_url] %> |
+     <%= repo[:description] %> |
+     <%= repo[:language] || "undefined" %></p>
+<% end %>

@@ -1,3 +1,5 @@
+<%= "Oops, no starred repositories were found." if @repos.empty? %>
+
 <% @repos.each do |repo| %>
   <p><%= link_to repo[:name], repo[:html_url] %> |
      <%= repo[:description] %> |

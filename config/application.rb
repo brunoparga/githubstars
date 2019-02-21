@@ -28,9 +28,13 @@ module Githubstars
     # the framework and any gems in your application.
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.system_tests = false
+      g.assets = false
+      g.helper = false
+    end
 
-    # Autoload files from /lib folder
+    # Autoload files from /lib folder (which apparently is a bad idea?)
     config.autoload_paths += %W(#{config.root}/lib)
   end
 end

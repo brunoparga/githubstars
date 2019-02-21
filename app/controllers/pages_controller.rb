@@ -6,10 +6,4 @@ class PagesController < ApplicationController
     Repository.destroy_all
     Tag.destroy_all
   end
-
-  def repos
-    username = helpers.sanitize(params[:username]).strip
-    @repos = GithubInteractor.fetch_starred(username)
-    @repos.each { |repo| Repository.create(repo) }
-  end
 end

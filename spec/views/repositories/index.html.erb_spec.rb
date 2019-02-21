@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "pages/repos.html.erb", type: :view do
+RSpec.describe "repositories/index.html.erb", type: :view do
   let(:repos) do
     Array.new(5).map do
       {

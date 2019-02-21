@@ -1,4 +1,10 @@
+# brunoparga's githubstars
+
+My submission to Brainn's developer challenge
+
 # README
+
+--TODO--
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

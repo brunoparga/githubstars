@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get "/starred_by/:username",
         to: "repositories#index",
         as: :index
-    get "/apply_tag/:repository_id",
+    post "/apply_tag/:repository_id",
         to: "repository_tags#create",
         as: :apply_tag
     get "/search_by_tag/:tag_name",

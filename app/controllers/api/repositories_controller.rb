@@ -9,7 +9,7 @@ class Api::RepositoriesController < Api::BaseController
   end
 
   def search
-    @query = params[:tag_name]
+    @query = params.permit(:tag_name)[:tag_name]
     @repos = Repository
                .joins(:repository_tags)
                .joins(:tags)

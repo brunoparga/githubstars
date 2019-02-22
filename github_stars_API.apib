@@ -7,11 +7,22 @@ repositórios que receberam "estrela"; em seguida, pode-se adicionar e gerenciar
 "rótulos" (tags) nos repositórios. Por exemplo, o repo "react" poderia receber
 as tags "javascript" e "front-end".
 
+Repositórios e seus rótulos são persistidos num banco de dados PostgreSQL. Como
+o HTTP é um protocolo desprovido de estado (stateless), cada chamada à rota
+inicial (buscando por nome de usuário) exclui todos os repositórios do banco de
+dados e seus respectivos rótulos. Os rótulos em si, em separado de sua associação
+com os repositórios, permanecem registrados para futura utilização - por exemplo,
+para fins de recomendação de rótulo.
+
+Uma futura versão da API registrará o nome de usuário, poupando consultas à API
+do Github, aprimorando o uso do banco de dados (pois não haverá necessidade de
+limpar tabelas a cada novo uso) e permitindo melhores recomendações ao usuário.
+
 # Group Repositórios
 
 Recursos relacionados a repositórios na API.
 
-## Coleção Repositórios [/api/repositories/{username}]
+## Coleção Repositórios [/api/repositories/starred_by/{username}]
 
 Um objeto Repositório (Repository) tem os seguintes atributos:
 
@@ -26,6 +37,8 @@ Um objeto Repositório (Repository) tem os seguintes atributos:
     este usuário "estrelou".
 
 ### Listar os repositórios de um usuário [GET]
+
+Busca todos os repositórios "estrelados" pelo usuário.
 
 + Response 200 (application/json; charset=utf-8)
 
@@ -52,4 +65,112 @@ Um objeto Repositório (Repository) tem os seguintes atributos:
               "language": "undefined"
             }
           ]
+        }
+
+## Repositórios com uma dada tag [/api/repositories/search_by_tag/{tag_name}]
+
+### Buscar repositórios por nome (parcial) de tag [GET]
+
+Busca os repositórios do usuário que têm um dado rótulo. A pesquisa apenas pelo
+início do nome da tag retorna todos os nomes que completam o fragmento dado:
+assim, `doc` inclui `docker` e `documentation`.
+
++ Response 200 (application/json; charset=utf-8)
+        {
+          "search_tag": "doc"
+          "results": [
+            {
+              "matching_tag": "documentation",
+              "repositories": [
+                {
+                  "id": 18442377,
+                  "name": "dotfiles",
+                  "description": "Default configuration for Le Wagon's students",
+                  "html_url": "https://github.com/lewagon/dotfiles",
+                  "language": "Shell"
+                }
+              ]
+            }, {
+              "matching_tag": "docker",
+              "repositories": [
+                {
+                  "id": 18486300,
+                  "name": "setup",
+                  "description": "Setup instructions for Le Wagon's students on their first day of camp",
+                  "html_url": "https://github.com/lewagon/setup",
+                  "language": "Ruby"
+                }, {
+                  "id": 118746761,
+                  "name": "challenge-development",
+                  "description": "A cool development challenge for our awesome future team",
+                  "html_url": "https://github.com/brainn-co/challenge-development",
+                  "language": "undefined"
+                }
+              ]
+            }
+          ]
+        }
+
+# Group Rótulos
+
+Recursos relacionados a rótulos (tags) na API.
+
+## Rótulo de Repositório [/api/repositories/apply_tag/{repository_id}]
+
+Um objeto Rótulo tem o seguinte atributo:
+
++ name - nome da tag
+
++ Parameters
+    + repository_id: 118746761 (required, number) - Github ID of the Repository
+      in form of an integer
+
+### Aplicar Rótulo a Repositório [POST]
+
+Aplica um determinado rótulo ao repositório, a menos que já tenha sido aplicado.
+
++ Request (application/json)
+
+        {
+            "tag_name": "challenging"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /repositories/118746761
+
+    + Body
+
+            {
+                "repository_name": "challenge-development",
+                "tag_list": [
+                    {
+                        "tag_name": "challenging"
+                    }
+                ]
+            }
+
+## Recomendações de Rótulos [/api/repositories/recommend_tags/{repository_id}]
+
+Caso o usuário precise de ideias de rótulos a aplicar, pode obter recomendações
+por esta rota. A linguagem do repositório, se existente, é sempre recomendada;
+caso não seja definida, recomenda-se o rótulo "documentation".
+
+### Buscar recomendações [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "repository_name": "react",
+            "suggested_tags": [
+                {
+                    "recommended_tag": "javascript"
+                }, {
+                    "recommended_tag": "front-end"
+                }, {
+                    "recommended_tag": "framework"
+                }
+            ]
         }

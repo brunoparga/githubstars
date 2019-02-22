@@ -22,7 +22,7 @@ limpar tabelas a cada novo uso) e permitindo melhores recomendações ao usuári
 
 Recursos relacionados a repositórios na API.
 
-## Coleção Repositórios [/api/repositories/starred_by/{username}]
+## Coleção Repositórios [/api/starred_by/{username}]
 
 Um objeto Repositório (Repository) tem os seguintes atributos:
 
@@ -67,7 +67,7 @@ Busca todos os repositórios "estrelados" pelo usuário.
           ]
         }
 
-## Repositórios com uma dada tag [/api/repositories/search_by_tag/{tag_name}]
+## Repositórios com uma dada tag [/api/search_by_tag/{tag_name}]
 
 ### Buscar repositórios por nome (parcial) de tag [GET]
 
@@ -115,7 +115,7 @@ assim, `doc` inclui `docker` e `documentation`.
 
 Recursos relacionados a rótulos (tags) na API.
 
-## Rótulo de Repositório [/api/repositories/apply_tag/{repository_id}]
+## Rótulo de Repositório [/api/apply_tag/{repository_id}]
 
 Um objeto Rótulo tem o seguinte atributo:
 
@@ -152,7 +152,7 @@ Aplica um determinado rótulo ao repositório, a menos que já tenha sido aplica
                 ]
             }
 
-## Recomendações de Rótulos [/api/repositories/recommend_tags/{repository_id}]
+## Recomendações de Rótulos [/api/recommend_tags/{repository_id}]
 
 Caso o usuário precise de ideias de rótulos a aplicar, pode obter recomendações
 por esta rota. A linguagem do repositório, se existente, é sempre recomendada;

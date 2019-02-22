@@ -1,0 +1,55 @@
+FORMAT: 1A
+
+# Github Stars
+
+Github Stars é uma API que permite consultar, para um dado usuário do Github, os
+repositórios que receberam "estrela"; em seguida, pode-se adicionar e gerenciar
+"rótulos" (tags) nos repositórios. Por exemplo, o repo "react" poderia receber
+as tags "javascript" e "front-end".
+
+# Group Repositórios
+
+Recursos relacionados a repositórios na API.
+
+## Coleção Repositórios [/api/repositories/{username}]
+
+Um objeto Repositório (Repository) tem os seguintes atributos:
+
++ name - nome do repositório, sem o nome do usuário a que pertence
++ description - descrição
++ github_id - ID no Github, podendo ser diferente do ID na API
++ html_url - URL HTTP para obter o repositório no Github
++ language - linguagem principal do repositório; pode ser "undefined" (indefinida)
+
++ Parameters
+    + username: brunoparga (required, string) - a API busca os repositórios que
+    este usuário "estrelou".
+
+### Listar os repositórios de um usuário [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "username": "brunoparga",
+          "repositories": [
+            {
+              "id": 18442377,
+              "name": "dotfiles",
+              "description": "Default configuration for Le Wagon's students",
+              "html_url": "https://github.com/lewagon/dotfiles",
+              "language": "Shell"
+            }, {
+              "id": 18486300,
+              "name": "setup",
+              "description": "Setup instructions for Le Wagon's students on their first day of camp",
+              "html_url": "https://github.com/lewagon/setup",
+              "language": "Ruby"
+            }, {
+              "id": 118746761,
+              "name": "challenge-development",
+              "description": "A cool development challenge for our awesome future team",
+              "html_url": "https://github.com/brainn-co/challenge-development",
+              "language": "undefined"
+            }
+          ]
+        }

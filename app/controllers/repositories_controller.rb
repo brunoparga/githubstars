@@ -3,7 +3,7 @@
 class RepositoriesController < ApplicationController
   def index
     @username = helpers.sanitize(params[:username]).strip
-    @repos = GithubInteractor.fetch_starred(@username)
+    @repos = GithubInteractor.fetch_starred(@username, :html)
     @repos.map! { |repo| Repository.create(repo) }
     @repository_tag = RepositoryTag.new
   end

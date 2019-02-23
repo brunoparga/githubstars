@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe RepositoryTag, type: :model do
   # This test should work, but doesn't because of a known issue with
+  # shoulda_matchers: https://github.com/thoughtbot/shoulda-matchers/issues/814
 
   # before do
   #   ruby_tag = FactoryBot.create(:tag, name: "ruby")
@@ -11,7 +12,6 @@ RSpec.describe RepositoryTag, type: :model do
   #   described_class.create(repository: rails, tag: ruby_tag)
   # end
 
-  # shoulda_matchers: https://github.com/thoughtbot/shoulda-matchers/issues/814
   # it { should validate_uniqueness_of(:tag).scoped_to(:repository) }
 
   let(:ruby_tag) { FactoryBot.create(:tag, name: "ruby") }

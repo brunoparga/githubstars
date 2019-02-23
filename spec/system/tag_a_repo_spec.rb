@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-feature "Add tags to repositories", type: :system do
+feature "Add tags to repositories", type: :system, js: true do
   Capybara.match = :first
 
   background do

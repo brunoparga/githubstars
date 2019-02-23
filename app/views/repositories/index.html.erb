@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <% @repos.each do |repo| %>
-          <tr>
+          <tr id="repo-<%= repo.id %>">
             <td><%= link_to repo.name, repo.html_url %></td>
             <td class="description"><%= repo.description %></td>
             <td><%= repo.language.downcase || "undefined" %></td>
@@ -27,7 +27,7 @@
               <% end %>
             </td>
             <td>
-              <%= form_for [repo, RepositoryTag.new] do |f| %>
+              <%= form_for [repo, RepositoryTag.new], remote: true do |f| %>
                 <%= hidden_field_tag :repo_ids, @repos.map { |repo| repo.id } %>
                 <%= hidden_field_tag :username, session[:username] %>
                 <%= text_field_tag :name, "", class: "tag_input" %>

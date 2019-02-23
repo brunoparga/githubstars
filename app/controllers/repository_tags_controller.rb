@@ -2,11 +2,9 @@
 
 class RepositoryTagsController < ApplicationController
   def create
-    tag = Tag.find_by(name: params[:name]) || Tag.create(tag_params)
-    repo = Repository.find(params[:repository_id])
-    RepositoryTag.create(repository: repo, tag: tag)
-    @repos = params[:repo_ids].split.map { |id| Repository.find(id.to_i) }
-    render "repositories/index"
+    tag = Tag.find_by(name: tag_params[:name]) || Tag.create(tag_params)
+    @repo = Repository.find(params[:repository_id])
+    @repo_tag = RepositoryTag.create(repository: @repo, tag: tag)
   end
 
   def destroy

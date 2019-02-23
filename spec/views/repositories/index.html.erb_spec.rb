@@ -3,25 +3,16 @@
 require "rails_helper"
 
 RSpec.describe "repositories/index.html.erb", type: :view do
-  let(:repos) do
-    Array.new(5).map do
-      {
-        id: 6,
-        name: "bananas",
-        description: "fruity JavaScript framework",
-        html_url: "https://github.com/bananas/bananas",
-        language: "javascript"
-      }
-    end
-  end
+  let(:repo_list) { [FactoryBot.create(:repository)] }
 
   context "when assigned a list of starred repos" do
     it "shows the repo information" do
-      assign(:repos, repos)
+      assign(:repos, repo_list)
 
       render
 
-      expect(rendered).to have_link("bananas", href: "https://github.com/bananas/bananas")
+      expect(rendered).to have_link(
+        "challenge-development", href: "https://github.com/brainn-co/challenge-development")
     end
   end
 
@@ -31,7 +22,7 @@ RSpec.describe "repositories/index.html.erb", type: :view do
 
       render
 
-      expect(rendered).to have_content("Oops, no starred repositories were found.")
+      expect(rendered).to have_content("Oops, no starred repositories were found")
     end
   end
 end

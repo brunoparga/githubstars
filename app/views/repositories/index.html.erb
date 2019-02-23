@@ -1,8 +1,8 @@
 <div id="table-container">
   <% if @repos.empty? %>
-    <header id="main-label"><%= "Oops, no starred repositories were found for user #{@username}." %></header>
+    <header id="main-label"><%= "Oops, no starred repositories were found for user #{session[:username]}." %></header>
   <% else %>
-    <header id="main-label"><%= @username %>'s starred repositories</header>
+    <header id="main-label"><%= session[:username] %>'s starred repositories</header>
     <table>
       <thead>
         <tr>
@@ -19,17 +19,19 @@
             <td><%= link_to repo.name, repo.html_url %></td>
             <td class="description"><%= repo.description %></td>
             <td><%= repo.language.downcase || "undefined" %></td>
-            <td><%= form_for [repo, @repository_tag] do |f| %>
-              <%= hidden_field_tag :repo_ids, @repos.map { |repo| repo.id } %>
-              <%= hidden_field_tag :username, @username %>
-              <%= text_field_tag :name, "", class: "tag_input" %>
-              <%= submit_tag "+" %>
-            <% end %></td>
             <td class="tags">
               <% repo.repository_tags.each do |repo_tag| %>
                 <div id="repo-tag<%= repo_tag.id %>">
                   <%= repo_tag.name %>&nbsp;<%= link_to "x", repo_tag, method: :delete, remote: true %>
                 </div>
+              <% end %>
+            </td>
+            <td>
+              <%= form_for [repo, RepositoryTag.new] do |f| %>
+                <%= hidden_field_tag :repo_ids, @repos.map { |repo| repo.id } %>
+                <%= hidden_field_tag :username, session[:username] %>
+                <%= text_field_tag :name, "", class: "tag_input" %>
+                <%= submit_tag "+" %>
               <% end %>
             </td>
           </tr>

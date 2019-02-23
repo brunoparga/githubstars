@@ -9,10 +9,11 @@ class Api::RepositoriesController < Api::BaseController
   end
 
   def search
-    @query = params.permit(:tag_name)[:tag_name]
-    @repos = Repository
-               .joins(:repository_tags)
-               .joins(:tags)
-               .where("tags.name ILIKE ?", "#{@query}%")
+    @search_tag = params.permit(:tag_name)[:tag_name]
+    matches = Tag.where("name ILIKE ?", "#{@search_tag}%")
+    @repos = matches.map do |match|
+      { matching_tag: match.name,
+        repositories: match.repositories }
+    end
   end
 end

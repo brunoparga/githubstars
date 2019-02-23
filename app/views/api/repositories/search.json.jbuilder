@@ -1,4 +1,7 @@
 # frozen_string_literal: true
 
-json.search_tag @query
-json.results @repos, *%i[github_id name description html_url language]
+json.search_tag @search_tag
+json.results @repos do |repo|
+  json.matching_tag repo[:matching_tag]
+  json.repositories repo[:repositories], *%i[github_id name description html_url language]
+end

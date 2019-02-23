@@ -9,12 +9,13 @@ class Api::RepositoryTagsController < Api::BaseController
     RepositoryTag.create(repository: @repo, tag: tag)
     response
       .set_header("Location", "repositories/#{permitted_params[:repository_id]}")
+    render :create, status: :created
   end
 
   def recommend
     @repo = Repository.find_by(github_id: params[:repository_id])
-    @recommendation = @repo.language.downcase
-    @recommendation = "documentation" if @recommendation == "undefined"
+    @recommendations = [@repo.language.downcase]
+    @recommendations = ["documentation"] if @recommendations == ["undefined"]
   end
 
   private

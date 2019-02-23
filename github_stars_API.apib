@@ -46,19 +46,19 @@ Busca todos os repositórios "estrelados" pelo usuário.
           "username": "brunoparga",
           "repositories": [
             {
-              "id": 18442377,
+              "github_id": 18442377,
               "name": "dotfiles",
               "description": "Default configuration for Le Wagon's students",
               "html_url": "https://github.com/lewagon/dotfiles",
               "language": "Shell"
             }, {
-              "id": 18486300,
+              "github_id": 18486300,
               "name": "setup",
               "description": "Setup instructions for Le Wagon's students on their first day of camp",
               "html_url": "https://github.com/lewagon/setup",
               "language": "Ruby"
             }, {
-              "id": 118746761,
+              "github_id": 118746761,
               "name": "challenge-development",
               "description": "A cool development challenge for our awesome future team",
               "html_url": "https://github.com/brainn-co/challenge-development",
@@ -69,6 +69,10 @@ Busca todos os repositórios "estrelados" pelo usuário.
 
 ## Repositórios com uma dada tag [/api/search_by_tag/{tag_name}]
 
++ Parameters
+    + tag_name: doc (required, string) - Search for tags beginning with this
+      string and all their repositories
+
 ### Buscar repositórios por nome (parcial) de tag [GET]
 
 Busca os repositórios do usuário que têm um dado rótulo. A pesquisa apenas pelo
@@ -77,7 +81,7 @@ assim, `doc` inclui `docker` e `documentation`.
 
 + Response 200 (application/json; charset=utf-8)
         {
-          "search_tag": "doc"
+          "search_tag": "doc",
           "results": [
             {
               "matching_tag": "documentation",
@@ -135,7 +139,7 @@ Aplica um determinado rótulo ao repositório, a menos que já tenha sido aplica
             "tag_name": "challenging"
         }
 
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
 
     + Headers
 
@@ -158,13 +162,17 @@ Caso o usuário precise de ideias de rótulos a aplicar, pode obter recomendaç�
 por esta rota. A linguagem do repositório, se existente, é sempre recomendada;
 caso não seja definida, recomenda-se o rótulo "documentation".
 
++ Parameters
+    + repository_id: 118746761 (required, number) - Github ID of the Repository
+      in form of an integer
+
 ### Buscar recomendações [GET]
 
 + Response 200 (application/json; charset=utf-8)
 
         {
             "repository_name": "react",
-            "suggested_tags": [
+            "recommended_tags": [
                 {
                     "recommended_tag": "javascript"
                 }, {

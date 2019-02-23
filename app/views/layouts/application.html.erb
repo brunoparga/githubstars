@@ -10,7 +10,9 @@
   </head>
 
   <body>
-    <div><%= link_to "githubstars", root_path %></div>
-    <%= yield %>
+    <%= render "shared/navbar" %>
+    <div class="main-wrapper">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,18 +1,34 @@
-<%= @username %>'s starred repositories
-<%= "Oops, no starred repositories were found." if @repos.empty? %>
-
-<% @repos.each do |repo| %>
-  <p>
-    <%= link_to repo.name, repo.html_url %> |
-    <%= repo.description %> |
-    <%= repo.language || "undefined" %> |
-    <%= repo.repository_tags.map { |tag| tag.name }.join(", ") %>
-    <%= form_for [repo, @repository_tag] do |f| %>
-      <%= hidden_field_tag :repo_ids, @repos.map { |repo| repo.id } %>
-      <%= hidden_field_tag :username, @username %>
-      <%= label_tag(:name, "Add tag: ") %>
-      <%= text_field_tag(:name) %>
-      <%= submit_tag "+" %>
-    <% end %>
-  </p>
-<% end %>
+<div id="table-container">
+  <% if @repos.empty? %>
+    <header id="main-label"><%= "Oops, no starred repositories were found for user #{@username}." %></header>
+  <% else %>
+    <header id="main-label"><%= @username %>'s starred repositories</header>
+    <table>
+      <thead>
+        <tr>
+          <th>Repository</th>
+          <th class="description">Description</th>
+          <th>Language</th>
+          <th>Tags</th>
+          <th>Add tag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @repos.each do |repo| %>
+          <tr>
+            <td><%= link_to repo.name, repo.html_url %></td>
+            <td class="description"><%= repo.description %></td>
+            <td><%= repo.language.downcase || "undefined" %></td>
+            <td><%= repo.repository_tags.map { |tag| tag.name }.join(", ") %></td>
+            <td><%= form_for [repo, @repository_tag] do |f| %>
+              <%= hidden_field_tag :repo_ids, @repos.map { |repo| repo.id } %>
+              <%= hidden_field_tag :username, @username %>
+              <%= text_field_tag :name, "", class: "tag_input" %>
+              <%= submit_tag "+" %>
+            <% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

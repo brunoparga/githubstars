@@ -11,8 +11,8 @@ class Api::RepositoriesController < Api::BaseController
   def search
     @query = params.permit(:tag_name)[:tag_name]
     @repos = Repository
-               .includes(repository_tags: [:tag])
-               .where(tags: {"name ILIKE ?" => "#{@query}%"})
-    binding.pry
+               .joins(:repository_tags)
+               .joins(:tags)
+               .where(tags: { name: @query })
   end
 end

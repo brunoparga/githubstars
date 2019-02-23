@@ -80,39 +80,40 @@ início do nome da tag retorna todos os nomes que completam o fragmento dado:
 assim, `doc` inclui `docker` e `documentation`.
 
 + Response 200 (application/json; charset=utf-8)
+
         {
-          "search_tag": "doc",
-          "results": [
-            {
-              "matching_tag": "documentation",
-              "repositories": [
+            "search_tag": "doc",
+            "results": [
                 {
-                  "id": 18442377,
-                  "name": "dotfiles",
-                  "description": "Default configuration for Le Wagon's students",
-                  "html_url": "https://github.com/lewagon/dotfiles",
-                  "language": "Shell"
-                }
-              ]
-            }, {
-              "matching_tag": "docker",
-              "repositories": [
-                {
-                  "id": 18486300,
-                  "name": "setup",
-                  "description": "Setup instructions for Le Wagon's students on their first day of camp",
-                  "html_url": "https://github.com/lewagon/setup",
-                  "language": "Ruby"
+                    "matching_tag": "documentation",
+                    "repositories": [
+                        {
+                            "id": 18442377,
+                            "name": "dotfiles",
+                            "description": "Default configuration for Le Wagon's students",
+                            "html_url": "https://github.com/lewagon/dotfiles",
+                            "language": "Shell"
+                        }
+                    ]
                 }, {
-                  "id": 118746761,
-                  "name": "challenge-development",
-                  "description": "A cool development challenge for our awesome future team",
-                  "html_url": "https://github.com/brainn-co/challenge-development",
-                  "language": "undefined"
+                    "matching_tag": "docker",
+                    "repositories": [
+                        {
+                            "id": 18486300,
+                            "name": "setup",
+                            "description": "Setup instructions for Le Wagon's students on their first day of camp",
+                            "html_url": "https://github.com/lewagon/setup",
+                            "language": "Ruby"
+                        }, {
+                            "id": 118746761,
+                            "name": "challenge-development",
+                            "description": "A cool development challenge for our awesome future team",
+                            "html_url": "https://github.com/brainn-co/challenge-development",
+                            "language": "undefined"
+                        }
+                    ]
                 }
-              ]
-            }
-          ]
+            ]
         }
 
 # Group Rótulos

@@ -13,6 +13,6 @@ class Api::RepositoriesController < Api::BaseController
     @repos = Repository
                .joins(:repository_tags)
                .joins(:tags)
-               .where(tags: { name: @query })
+               .where("tags.name ILIKE ?", "#{@query}%")
   end
 end

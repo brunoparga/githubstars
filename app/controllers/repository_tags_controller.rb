@@ -11,6 +11,11 @@ class RepositoryTagsController < ApplicationController
     render "repositories/index"
   end
 
+  def destroy
+    @id = params[:id]
+    RepositoryTag.find(@id).destroy
+  end
+
   private
 
     def tag_params

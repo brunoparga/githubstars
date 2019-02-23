@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   root to: "pages#home"
+
   resources :repositories, only: :index do
     resources :repository_tags, only: :create
   end
+  resources :repository_tags, only: :destroy
+
   get "api_doc", to: "pages#api_doc", as: :api_doc
+
   namespace :api, defaults: { format: :json } do
     get "/starred_by/:username",
         to: "repositories#index",

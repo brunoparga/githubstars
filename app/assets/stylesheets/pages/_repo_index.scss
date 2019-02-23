@@ -16,6 +16,7 @@ th, td {
   border-left: 1px solid black;
   border-right: 1px solid black;
   padding: 5px;
+  height: 34px;
 }
 th {
   background-color: #DDD;
@@ -26,9 +27,25 @@ tr:nth-child(odd) {
 .description {
   width: 100%;
 }
+.tags{
+  min-width: 200px;
+  max-width: 200px;
+}
 .new_repository_tag {
   display: flex;
 }
 .tag_input {
   width: 90px;
+}
+td>div {
+  display: inline-block;
+  background-color: #F8F8F8;
+  height: 24px;
+  border-radius: 12px;
+  padding: 7px 7px 0 7px;
+  a {
+    font-weight: bolder;
+    color: red;
+    text-decoration: none;
+  }
 }

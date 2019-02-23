@@ -3,6 +3,8 @@
 require "rails_helper"
 
 feature "Add tags to repositories", type: :system do
+  Capybara.match = :first
+
   background do
     visit "/"
     fill_in "username", with: "brunoparga"

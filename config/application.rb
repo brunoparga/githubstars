@@ -36,5 +36,8 @@ module Githubstars
 
     # Autoload files from /lib folder (which apparently is a bad idea?)
     config.autoload_paths += %W(#{config.root}/lib)
+
+    # This must be enabled for Ajax forms and links to work
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

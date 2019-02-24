@@ -6,9 +6,7 @@ feature "Remove tags from repositories", type: :system, js: true do
   Capybara.match = :first
 
   background do
-    visit "/"
-    fill_in "username", with: "brunoparga"
-    click_button "get repositories"
+    visit "/repositories?username=brunoparga"
     fill_in "name", with: "impossibly_long_tag_name"
     click_button "+"
   end

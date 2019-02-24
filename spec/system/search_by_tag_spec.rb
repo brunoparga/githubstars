@@ -9,7 +9,7 @@ feature "Filter repositories by tag", type: :system, js: true do
 
   scenario "only the searched tags appear" do
     visit "/repositories?username=brunoparga"
-    forms = page.all("form")
+    forms = page.find("table").all("form")
     forms[0].fill_in "name", with: "javascript"
     forms[0].click_button "+"
     forms[1].fill_in "name", with: "documentation"
@@ -17,7 +17,7 @@ feature "Filter repositories by tag", type: :system, js: true do
     forms[2].fill_in "name", with: "docker"
     forms[2].click_button "+"
 
-    fill_in "search-form", with: "doc"
+    fill_in "tag_name", with: "doc"
     click_button "search"
 
     expect(page).to have_content "documentation"

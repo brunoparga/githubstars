@@ -3,11 +3,28 @@
 require "rails_helper"
 
 feature "Filter repositories by tag", type: :system, js: true do
-  scenario "" do
+  background do
+    FactoryBot.create(:repository)
+  end
+
+  scenario "only the searched tags appear" do
     visit "/repositories?username=brunoparga"
-    # How do I properly test this? There needs to be a repo whose only tag is
-    # docker, another whose only tag is documentation, and a third with only
-    # javascript; when searching for doc only the first two must appear. I'll
-    # need to read up on Capybara finding to do this.
+    forms = page.all("form")
+    forms[0].fill_in "name", with: "javascript"
+    forms[0].click_button "+"
+    forms[1].fill_in "name", with: "documentation"
+    forms[1].click_button "+"
+    forms[2].fill_in "name", with: "docker"
+    forms[2].click_button "+"
+
+    fill_in "search-form", with: "doc"
+    click_button "search"
+
+    expect(page).to have_content "documentation"
+    expect(page).to have_content "docker"
+    expect(page).not_to have_content "javascript"
+
+    # Show no untagged repositories
+    expect(page).not_to have_xpath "//td[@class=\"tags\"][not(./div)]"
   end
 end

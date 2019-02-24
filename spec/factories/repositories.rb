@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :repository do
-    github_id { 118746761 }
-    name { "challenge-development" }
-    description { "A cool development challenge for our awesome future team" }
-    html_url { "https://github.com/brainn-co/challenge-development" }
-    language { "undefined" }
+    github_id { 118747761 }
+    name { "factory-bot-created" }
+    description { "A sample repo" }
+    html_url { "https://github.com/wrong/does-not-exist" }
+    language { "ruby" }
   end
 end

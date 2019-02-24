@@ -68,6 +68,8 @@ group :test do
   gem "capybara-selenium"
   gem "chromedriver-helper"
   gem "selenium-webdriver"
+  # See the page in the state Capybara puts it
+  gem "launchy"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

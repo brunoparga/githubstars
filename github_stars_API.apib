@@ -2,43 +2,41 @@ FORMAT: 1A
 
 # Github Stars
 
-Github Stars é uma API que permite consultar, para um dado usuário do Github, os
-repositórios que receberam "estrela"; em seguida, pode-se adicionar e gerenciar
-"rótulos" (tags) nos repositórios. Por exemplo, o repo "react" poderia receber
-as tags "javascript" e "front-end".
+The Github Stars API allows the consumer to see the repositores a given Github
+user has starred. Then one can add and manage tags on the repositories. The
+"react" repo, for example, could be tagged with "javascript" and "front-end".
 
-Repositórios e seus rótulos são persistidos num banco de dados PostgreSQL. Como
-o HTTP é um protocolo desprovido de estado (stateless), cada chamada à rota
-inicial (buscando por nome de usuário) exclui todos os repositórios do banco de
-dados e seus respectivos rótulos. Os rótulos em si, em separado de sua associação
-com os repositórios, permanecem registrados para futura utilização - por exemplo,
-para fins de recomendação de rótulo.
+Repositories and their tags are persisted in a PostgreSQL database. Due to the
+statelessness of HTTP, each call to the initial route - looking for a user's
+repos - clears the DB of existing repos and their tags. The tags themselves, as
+distinct from their association with repos, are kept for future usage - e.g. for
+tag recommendation purposes.
 
-Uma futura versão da API registrará o nome de usuário, poupando consultas à API
-do Github, aprimorando o uso do banco de dados (pois não haverá necessidade de
-limpar tabelas a cada novo uso) e permitindo melhores recomendações ao usuário.
+A forthcoming version of the API will keep track of the username, saving Github
+API calls, improving DB usage (since the cleanup for each call won't be needed)
+and allowing for better tag recommendations.
 
-# Group Repositórios
+# Group Repositories
 
-Recursos relacionados a repositórios na API.
+Resources related to repositories in the API.
 
-## Coleção Repositórios [/api/starred_by/{username}]
+## Collection Repositores [/api/starred_by/{username}]
 
-Um objeto Repositório (Repository) tem os seguintes atributos:
+A Repository object has the following attributes:
 
-+ name - nome do repositório, sem o nome do usuário a que pertence
-+ description - descrição
-+ github_id - ID no Github, podendo ser diferente do ID na API
-+ html_url - URL HTTP para obter o repositório no Github
-+ language - linguagem principal do repositório; pode ser "undefined" (indefinida)
++ name - the plain name of the repo, without its owning account
++ description
++ github_id - may be different from the local ID
++ html_url - repo location on Github
++ language - main language of the code; may be undefined
 
 + Parameters
-    + username: brunoparga (required, string) - a API busca os repositórios que
-    este usuário "estrelou".
+    + username: brunoparga (required, string) - the API fetches the repositories
+      starred by this user.
 
-### Listar os repositórios de um usuário [GET]
+### List a user's starred repositories [GET]
 
-Busca todos os repositórios "estrelados" pelo usuário.
+Fetch a user's starred repositories.
 
 + Response 200 (application/json; charset=utf-8)
 
@@ -67,17 +65,17 @@ Busca todos os repositórios "estrelados" pelo usuário.
           ]
         }
 
-## Repositórios com uma dada tag [/api/search_by_tag/{tag_name}]
+## Repositories with a given tag [/api/search_by_tag/{tag_name}]
 
 + Parameters
     + tag_name: doc (required, string) - Search for tags beginning with this
       string and all their repositories
 
-### Buscar repositórios por nome (parcial) de tag [GET]
+### Find repositories by (partial) tag name [GET]
 
-Busca os repositórios do usuário que têm um dado rótulo. A pesquisa apenas pelo
-início do nome da tag retorna todos os nomes que completam o fragmento dado:
-assim, `doc` inclui `docker` e `documentation`.
+Look up the user's repos with a given tag. All tags matching the given string as
+the beginning of their name are included in the search: `doc` matches both
+`docker` and `documentation`.
 
 + Response 200 (application/json; charset=utf-8)
 
@@ -116,23 +114,22 @@ assim, `doc` inclui `docker` e `documentation`.
             ]
         }
 
-# Group Rótulos
+# Group Tags
 
-Recursos relacionados a rótulos (tags) na API.
+Resources related to tags in the API.
 
-## Rótulo de Repositório [/api/apply_tag/{repository_id}]
+## Repository Tag [/api/apply_tag/{repository_id}]
 
-Um objeto Rótulo tem o seguinte atributo:
+A Tag object has the following attribute:
 
-+ name - nome da tag
++ name
 
 + Parameters
-    + repository_id: 118746761 (required, number) - Github ID of the Repository
-      in form of an integer
+    + repository_id: 118746761 (required, integer) - Github ID of the Repository
 
-### Aplicar Rótulo a Repositório [POST]
+### Apply tag to repository [POST]
 
-Aplica um determinado rótulo ao repositório, a menos que já tenha sido aplicado.
+Apply a given tag to the repository, unless it is already present.
 
 + Request (application/json)
 
@@ -157,17 +154,17 @@ Aplica um determinado rótulo ao repositório, a menos que já tenha sido aplica
                 ]
             }
 
-## Recomendações de Rótulos [/api/recommend_tags/{repository_id}]
+## Tag recommendations [/api/recommend_tags/{repository_id}]
 
-Caso o usuário precise de ideias de rótulos a aplicar, pode obter recomendações
-por esta rota. A linguagem do repositório, se existente, é sempre recomendada;
-caso não seja definida, recomenda-se o rótulo "documentation".
+Should the user need ideas for tags for their repos, they can get recommendations
+via this route. The repo language, if it exists, is always recommended; if it is
+undefined, the most likely reason is that the repo contains documentation, so
+the corresponding tag is suggested.
 
 + Parameters
-    + repository_id: 118746761 (required, number) - Github ID of the Repository
-      in form of an integer
+    + repository_id: 118746761 (required, integer) - Github ID of the Repository
 
-### Buscar recomendações [GET]
+### Get recommendations [GET]
 
 + Response 200 (application/json; charset=utf-8)
 

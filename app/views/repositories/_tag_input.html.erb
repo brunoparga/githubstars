@@ -1,6 +1,6 @@
 <td>
   <%= form_for [repo, RepositoryTag.new], remote: true do |f| %>
-    <%= text_field_tag :name, "", class: "tag_input" %>
+    <%= text_field_tag :name, repo.language.downcase, class: "tag_input" %>
     <%= submit_tag "+" %>
   <% end %>
 </td>

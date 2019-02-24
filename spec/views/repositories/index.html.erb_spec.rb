@@ -12,7 +12,7 @@ RSpec.describe "repositories/index.html.erb", type: :view do
       render
 
       expect(rendered).to have_link(
-        "challenge-development", href: "https://github.com/brainn-co/challenge-development")
+        "factory-bot-created", href: "https://github.com/wrong/does-not-exist")
     end
   end
 

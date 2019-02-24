@@ -3,6 +3,7 @@
     <header id="main-label"><%= "Oops, no starred repositories were found for user #{session[:username]}." %></header>
   <% else %>
     <header id="main-label">
+      <%= render "search" %>
       <h2><%= session[:username] %>'s starred repositories</h2>
     </header>
     <%= render "table", repos: @repos %>

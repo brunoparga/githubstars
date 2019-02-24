@@ -10,6 +10,6 @@ class Api::RepositoriesController < Api::BaseController
 
   def search
     @search_tag = params.permit(:tag_name)[:tag_name]
-    @repos = Search.search_tags(@search_tag)
+    @repos = Search.api(@search_tag)
   end
 end

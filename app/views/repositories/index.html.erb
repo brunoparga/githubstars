@@ -2,51 +2,9 @@
   <% if @repos.empty? %>
     <header id="main-label"><%= "Oops, no starred repositories were found for user #{session[:username]}." %></header>
   <% else %>
-    <header id="main-label"><%= session[:username] %>'s starred repositories</header>
-    <table>
-      <thead>
-        <tr>
-          <th>Repository</th>
-          <th class="description">Description</th>
-          <th>Language</th>
-          <th class="tags">Tags</th>
-          <th>Add tag</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @repos.each do |repo| %>
-          <tr id="repo-<%= repo.id %>">
-            <td><%= link_to repo.name, repo.html_url %></td>
-            <td class="description"><%= repo.description %></td>
-            <td><%= repo.language.downcase || "undefined" %></td>
-            <td class="tags">
-              <% repo.repository_tags.each do |repo_tag| %>
-                <div id="repo-tag<%= repo_tag.id %>">
-                  <%= repo_tag.name %>&nbsp;<%= link_to "x", repo_tag, method: :delete, remote: true %>
-                </div>
-              <% end %>
-            </td>
-            <td>
-              <%= form_for [repo, RepositoryTag.new], remote: true do |f| %>
-                <%= hidden_field_tag :repo_ids, @repos.map { |repo| repo.id } %>
-                <%= hidden_field_tag :username, session[:username] %>
-                <%= text_field_tag :name, "", class: "tag_input" %>
-                <%= submit_tag "+" %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-        <%# Fill out the page with empty lines if needed (wireframe)  %>
-        <% (14 - @repos.length).times do %>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <header id="main-label">
+      <h2><%= session[:username] %>'s starred repositories</h2>
+    </header>
+    <%= render "table", repos: @repos %>
   <% end %>
 </div>

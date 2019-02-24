@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Repository</th>
+      <th class="description">Description</th>
+      <th>Language</th>
+      <th class="tags">Tags</th>
+      <th>Add tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% repos.each do |repo| %>
+      <%= render "repo_row", repo: repo %>
+    <% end %>
+    <%# Fill out the page with empty lines if needed (wireframe)  %>
+    <%= render "filler", rows: (14 - repos.length) %>
+  </tbody>
+</table>

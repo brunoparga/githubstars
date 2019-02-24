@@ -39,8 +39,10 @@ tr:nth-child(odd) {
 .new_repository_tag {
   display: flex;
 }
-.tag_input {
+.tag-input {
   width: 90px;
+}
+.tag-input-gray {
   color: #AAA;
 }
 td>div {

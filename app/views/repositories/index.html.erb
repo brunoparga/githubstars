@@ -4,7 +4,7 @@
   <% else %>
     <header id="main-label">
       <%= render "search" %>
-      <h2><%= session[:username] %>'s starred repositories</h2>
+      <p><strong><%= session[:username] %>'s</strong> starred repositories</p>
     </header>
     <%= render "table", repos: @repos %>
   <% end %>

@@ -36,6 +36,16 @@
             </td>
           </tr>
         <% end %>
+        <%# Fill out the page with empty lines if needed (wireframe)  %>
+        <% (14 - @repos.length).times do %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   <% end %>

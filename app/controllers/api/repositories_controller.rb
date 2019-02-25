@@ -4,7 +4,7 @@ class Api::RepositoriesController < Api::BaseController
   def index
     [Repository, RepositoryTag].each { |klass| klass.destroy_all }
     @username = helpers.sanitize(params[:username]).strip
-    @repos = GithubInteractor.fetch_starred(@username)
+    @repos = ReposFetcher.fetch(@username)
     @repos.each { |repo| repo[:language] ||= "undefined" }
   end
 

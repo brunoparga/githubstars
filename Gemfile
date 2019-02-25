@@ -42,6 +42,8 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Enable system testing
   gem "capybara"
+  # Protect secret keys
+  gem "dotenv-rails"
   # Create objects for tests
   gem "factory_bot_rails"
   # Pry - very useful for debugging

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root to: "pages#home"
 
+  get "/auth/:provider/callback", to: "sessions#create"
+  get "/signout", to: "sessions#destroy", as: :signout
+
   resources :repositories, only: :index do
     collection do
       get 'search'

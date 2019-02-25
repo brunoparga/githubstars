@@ -1,6 +1,12 @@
 <div id="navbar">
   <h2>githubstars</h2>
   <div id="navbar-right">
+    <% if current_user %>
+      <strong><%= current_user.username %></strong>
+      <small><%= link_to "Sign out", signout_path %></small>
+    <% else %>
+      <%= link_to "Sign in", "/auth/github" %> - -
+    <% end %>
     <%= link_to "API docs", api_doc_path %> - -
     <%= link_to "home", root_path %>
   </div>

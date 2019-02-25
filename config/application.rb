@@ -32,6 +32,7 @@ module Githubstars
       g.system_tests = false
       g.assets = false
       g.helper = false
+      g.controller_specs = false
     end
 
     # Autoload files from /lib folder (which apparently is a bad idea?)

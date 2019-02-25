@@ -2,6 +2,22 @@
 
 My submission to Brainn's developer challenge
 
+# Known issues
+
+## tag recommendation
+
+When the user changes focus between the several tag adding forms, they switch
+from gray to black and from having the suggested tag to being empty for typing.
+However, submitting a tag that is different from the suggestion does not work,
+because the form submission triggers the blur/focusout event, which in turn
+switches the form value to the initial suggestion and submits that.
+
+## Github OAuth signup
+
+For this app it makes little sense to allow a user to sign up for Github in the
+OAuth process. I have tried to set the `allow_signup` parameter in the OAuth
+request to `false`, with no success.
+
 # README
 
 --TODO--

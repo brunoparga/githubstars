@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require_relative "../../lib/github_interactor.rb"
+require_relative "../../lib/repos_fetcher.rb"
 
 feature "Fetch starred repositories", type: :system do
   background "enter a Github username" do

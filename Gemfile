@@ -7,10 +7,8 @@ ruby "2.5.3"
 
 # Rubocop linter, configured with Rails standards
 gem "rubocop-rails_config"
-# Make HTTP requests
-gem "rest-client"
 # Omniauth authentication
-gem 'omniauth-github', github: 'omniauth/omniauth-github'
+gem "omniauth-github", github: "omniauth/omniauth-github"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.2"
 # Use postgresql as the database for Active Record

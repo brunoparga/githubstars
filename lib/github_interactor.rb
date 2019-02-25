@@ -6,7 +6,7 @@ module GithubInteractor
       starred_repos = File.read("#{username}")
     else
       url = "https://api.github.com/users/#{username}/starred?sort=updated&direction=desc"
-      starred_repos = RestClient.get(url)
+      starred_repos = Faraday.get(url).body
     end
     JSON.parse(starred_repos, symbolize_names: true)
       .map { |repo| repo.slice(*%i[id name description html_url language]) }

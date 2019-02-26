@@ -15,11 +15,17 @@ RSpec.describe RepositoryTag, type: :model do
   # it { should validate_uniqueness_of(:tag).scoped_to(:repository) }
 
   let(:ruby_tag) { FactoryBot.create(:tag, name: "ruby") }
-  let(:rails) { FactoryBot.create(:repository, name: "rails") }
+  let(:user) { FactoryBot.create(:user) }
+  let(:rails) do
+    repo = FactoryBot.create(:repository, name: "rails")
+    FactoryBot.create(:repository_user, repository: repo, user: user)
+    repo
+  end
+  let(:repo_tag_data) { { repository: rails, tag: ruby_tag, user: user } }
 
-  it "reject more than one of the same tag for a repo" do
-    described_class.create(repository: rails, tag: ruby_tag)
-    second_tag = described_class.new(repository: rails, tag: ruby_tag)
+  it "user cannot create more than one tag for a repo" do
+    FactoryBot.create(:repository_tag, repo_tag_data)
+    second_tag = FactoryBot.build(:repository_tag, repo_tag_data)
     expect(second_tag).not_to be_valid
   end
 end

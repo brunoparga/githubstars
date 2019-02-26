@@ -2,7 +2,7 @@
 
 class Repository < ApplicationRecord
   has_many :repository_users, dependent: :destroy
-  has_many :user, through: :repository_users
+  has_many :users, through: :repository_users
   has_many :repository_tags, dependent: :destroy
   has_many :tags, through: :repository_tags
 
@@ -17,4 +17,6 @@ class Repository < ApplicationRecord
   end
 
   validates :github_id, numericality: { only_integer: true }
+
+  default_scope { includes(:tags) }
 end

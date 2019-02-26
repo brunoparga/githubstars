@@ -8,15 +8,11 @@ class Repository < ApplicationRecord
 
   before_validation { self.language = "undefined" if self.language.nil? }
 
-  %i[github_id name description html_url language].each do |attr|
+  %i[github_id name html_url language].each do |attr|
     validates attr, presence: true
   end
 
-  %i[github_id name html_url].each do |attr|
-    validates attr, uniqueness: true
-  end
-
-  validates :github_id, numericality: { only_integer: true }
+  validates :github_id, uniqueness: true, numericality: { only_integer: true }
 
   default_scope { includes(:tags) }
 end

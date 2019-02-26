@@ -9,7 +9,7 @@ class RepositoriesController < ApplicationController
   def search
     @search_tag = params.permit(:tag_name)[:tag_name]
     @repos = Search.browser(@search_tag)
-    @repos = user.repos if @search_tag.empty?
+    @repos = searched_user.repositories if @search_tag.empty?
     render "repositories/index"
   end
 end

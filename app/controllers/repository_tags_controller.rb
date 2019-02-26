@@ -2,9 +2,10 @@
 
 class RepositoryTagsController < ApplicationController
   def create
-    tag = Tag.find_by(name: tag_params[:name]) || Tag.create(tag_params)
     @repo = Repository.find(params[:repository_id])
-    @repo_tag = RepositoryTag.create(repository: @repo, tag: tag)
+    @repo_tag = RepositoryTag.create(repository: @repo,
+                                     tag: set_tag,
+                                     user: searched_user)
   end
 
   def destroy
@@ -14,7 +15,7 @@ class RepositoryTagsController < ApplicationController
 
   private
 
-    def tag_params
-      params.permit(:name)
+    def set_tag
+      Tag.find_by(name: params.permit(:name)[:name]) || Tag.create(params.permit(:name))
     end
 end

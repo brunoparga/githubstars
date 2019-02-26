@@ -26,7 +26,7 @@ module ReposFetcher
   end
 
   def self.create_repo(repo)
-    Repository.find_or_create_by(repo)
+    Repository.find_by(github_id: repo[:github_id]) || Repository.create(repo)
   end
 
   def self.link_to_user(repo, user)

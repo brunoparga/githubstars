@@ -1,9 +1,7 @@
 <div id="main-form">
-  <form action="repositories">
-    <label>https://github.com/
-      <input type="text" placeholder="username" name="username">
-    </label>
-    <br>
-    <input id="submit" type="submit" value="get repositories">
-  </form>
+  <%= form_tag "/repositories", method: "get" do %>
+    <%= label_tag "username", "https://github.com/" %>
+    <%= text_field_tag "username", nil, placeholder: "username" %>
+    <%= submit_tag "get repositories", id: "submit" %>
+  <% end %>
 </div>

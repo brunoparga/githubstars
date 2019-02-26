@@ -2,10 +2,11 @@
 
 class RepositoryTagsController < ApplicationController
   def create
-    @repo = Repository.find(params[:repository_id])
-    @repo_tag = RepositoryTag.create(repository: @repo,
+    @repo_tag = RepositoryTag.create(repository_id: params[:repository_id],
                                      tag: set_tag,
                                      user: searched_user)
+    @repo = Repository.find(params[:repository_id])
+    @recommendation = Recommendation.get(@repo)
   end
 
   def destroy

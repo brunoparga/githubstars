@@ -1,4 +1,4 @@
-<tr id="repo-<%= repo.id %>">
-  <%= render "repo_data", repo: repo %>
+<tr id="repo-<%= repo[:record].id %>">
+  <%= render "repo_data", repo: repo[:record] %>
   <%= render "tag_input", repo: repo %>
 </tr>

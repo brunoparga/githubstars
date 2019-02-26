@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   has_many :repository_users, dependent: :destroy
   has_many :repositories, through: :repository_users
+  has_many :repository_tags, dependent: :destroy
 
   def self.create_with_omniauth(auth)
     create! do |user|

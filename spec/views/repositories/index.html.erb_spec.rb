@@ -3,11 +3,18 @@
 require "rails_helper"
 
 RSpec.describe "repositories/index.html.erb", type: :view do
-  let(:repo_list) { [FactoryBot.create(:repository)] }
+  let(:repo) { FactoryBot.create(:repository) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:repo_list) { [repo] }
+
+  before do
+    FactoryBot.create(:repository_user, repository: repo, user: user)
+  end
 
   context "when assigned a list of starred repos" do
     it "shows the repo information" do
       assign(:repos, repo_list)
+      assign(:searched_user, user)
 
       render
 

@@ -1,11 +1,7 @@
 <div id="table-container">
-  <% if @repos.empty? %>
-    <header id="main-label"><%= "Oops, no starred repositories were found for user #{session[:username]}." %></header>
-  <% else %>
-    <header id="main-label">
-      <%= render "search" %>
-      <p><strong><%= session[:username] %>'s</strong> starred repositories</p>
-    </header>
-    <%= render "table", repos: @repos %>
-  <% end %>
+  <header id="main-label">
+    <%= render "search" %>
+    <%= render "message", repos: @repos, search_tag: @search_tag %>
+  </header>
+  <%= render "table", repos: @repos %>
 </div>

@@ -41,17 +41,32 @@ tr:nth-child(odd) {
 }
 .tag-input {
   width: 90px;
+  border: 0;
+  background-color: #F8F8F8;
+}
+.tag-input:focus {
+  outline: 0;
+  border: 1px solid #CCC;
 }
 .tag-input-gray {
   color: #AAA;
 }
+.tag-submit {
+  border: 0;
+  color: #0C0;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 20px;
+  font-weight: bolder;
+}
+.tag-input, td>div {
+  height: 24px;
+  border-radius: 19px;
+  padding: 7px 7px 0 7px;
+  margin: 2px;
+}
 td>div {
   display: inline-block;
   background-color: #F8F8F8;
-  height: 24px;
-  border-radius: 12px;
-  padding: 7px 7px 0 7px;
-  margin: 2px;
   a {
     font-weight: bolder;
     color: red;

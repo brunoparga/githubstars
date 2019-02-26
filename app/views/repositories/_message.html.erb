@@ -1,10 +1,10 @@
 <p>
   <% case message(repos, search_tag) %>
   <% when :empty_search %>
-  Oops, no starred repositories with tags matching <%= search_tag %> were found for user <%= session[:username] %>.
+  Oops, no starred repositories with tags matching <strong><%= search_tag %></strong> were found for user <strong><%= session[:username] %></strong>.
   <% when :no_starred_repos %>
-  Oops, no starred repositories were found for user <%= session[:username] %>.
+  Oops, no starred repositories were found for user <strong><%= session[:username] %></strong>.
   <% when :found_repos %>
-  <%= session[:username] %>'s starred repositories
+  <strong><%= session[:username] %></strong>'s starred repositories
   <% end %>
 </p>

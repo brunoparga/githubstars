@@ -1,4 +1,4 @@
 <%= form_tag search_repositories_path, method: :get do %>
-  <%= text_field_tag :tag_name %>
+  <%= text_field_tag :tag_name, nil, placeholder: @search_tag %>
   <%= submit_tag "search" %>
 <% end %>

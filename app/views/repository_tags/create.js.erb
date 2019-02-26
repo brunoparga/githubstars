@@ -2,6 +2,6 @@ document
   .querySelector('#repo-<%= @repo.id %> > .tags')
   .innerHTML +=
     '<div id="repo-tag<%= @repo_tag.id %>">\
-      <%= @repo_tag.name %>&nbsp;<%= link_to "x", @repo_tag, method: :delete, remote: true %>\
+      <%= @repo_tag.name %>&nbsp;<%= link_to "x", repository_tag_path(@repo_tag), method: :delete, remote: true %>\
     </div>'
 document.querySelector('#repo-<%= @repo.id %> input[name="name"]').value = '';

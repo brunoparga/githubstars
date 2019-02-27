@@ -4,7 +4,9 @@ This is my submission to Brainn's developer challenge.
 
 ## Installation instructions
 
-First of all, clone the repository locally. Then start the database:
+The application runs on Ruby 2.5.3 and Rails 5.2.2. Use your Ruby version
+manager to install the right Ruby, then clone this repository locally. Then
+start the PostgreSQL database:
 
 ```
 $ rails db:create

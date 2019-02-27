@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.describe RepositoryTag, type: :model do
-  # This test should work, but doesn't because of a known issue with
-  # shoulda_matchers: https://github.com/thoughtbot/shoulda-matchers/issues/814
+  # This test doesn't work because of a known issue with shoulda_matchers.
+  # For more details, please see the Known Issues section of README.md.
 
   # before do
   #   ruby_tag = FactoryBot.create(:tag, name: "ruby")

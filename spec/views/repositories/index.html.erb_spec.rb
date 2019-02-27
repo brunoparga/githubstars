@@ -13,7 +13,6 @@ RSpec.describe "repositories/index.html.erb", type: :view do
 
   context "when assigned a list of starred repos" do
     it "shows the repo information" do
-      # TODO: build a list with recommendation
       assign(:repos, repo_list)
       assign(:searched_user, user)
 

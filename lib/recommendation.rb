@@ -3,7 +3,9 @@
 module Recommendation
   def self.get(repo, user)
     common_tag = most_common_tag(repo)
-    return common_tag.name unless user_has_tag?(repo, user, common_tag)
+    unless user_has_tag?(repo, user, common_tag) || common_tag.nil?
+      return common_tag.name
+    end
     name_tag = Tag.find_by(name: repo.language.downcase)
     language = repo.language.downcase
     language = "documentation" if language == "undefined"
@@ -26,6 +28,6 @@ module Recommendation
       .group(:tag)
       .count
       .max_by { |tag, count| count }
-      .first
+      &.first
   end
 end

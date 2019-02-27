@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "repositories/index.html.erb", type: :view do
   let(:repo) { FactoryBot.create(:repository) }
   let(:user) { FactoryBot.create(:user) }
-  let(:repo_list) { [repo] }
+  let(:repo_list) { [record: repo, recommendation: "recommended"] }
 
   before do
     FactoryBot.create(:repository_user, repository: repo, user: user)

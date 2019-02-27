@@ -18,6 +18,6 @@ feature "Fetch starred repositories", type: :system do
     forms = page.find_all(id: "name")
     expect(forms[0].value).to eq "shell"
     expect(forms[1].value).to eq "ruby"
-    expect(forms[2].value).to eq "undefined"
+    expect(forms[2].value).to eq "documentation"
   end
 end

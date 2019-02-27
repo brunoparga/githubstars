@@ -5,7 +5,9 @@
       <th class="description">Description</th>
       <th>Language</th>
       <th class="tags">Tags</th>
-      <th>Add tag</th>
+      <% if owner? %>
+        <th>Add tag</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>

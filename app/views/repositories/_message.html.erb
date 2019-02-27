@@ -1,5 +1,11 @@
 <p>
   <% case message(repos, search_tag) %>
+  <% when :empty_search_own %>
+  Welcome, <strong><%= session[:username] %></strong>! You have no repositories with tags matching <strong><%= search_tag %></strong>.
+  <% when :no_own_starred_repos %>
+  Welcome, <strong><%= session[:username] %></strong>! You have no starred repositories so far.
+  <% when :found_own_repos %>
+  Welcome, <strong><%= session[:username] %></strong>! Here are your starred repositories.
   <% when :empty_search %>
   Oops, no starred repositories with tags matching <strong><%= search_tag %></strong> were found for user <strong><%= session[:username] %></strong>.
   <% when :no_starred_repos %>

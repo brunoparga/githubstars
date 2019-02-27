@@ -3,7 +3,9 @@
 module Recommendation
   def self.get(repo)
     name_tag = Tag.find_by(name: repo.language.downcase)
-    return repo.language.downcase unless repo.tags.include? name_tag
+    language = repo.language.downcase
+    language = "documentation" if language == "undefined"
+    return language unless repo.tags.include? name_tag
     "favorite"
   end
 end

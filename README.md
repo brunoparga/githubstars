@@ -54,23 +54,49 @@ Fire up a browser and navigate to `http://localhost:3000`.
 
 ## Usage
 
+### Listing repositories
+
 Enter a Github username to get a list of the repositories they have starred. A
-list of tags the user has applied to each repository is also available;
-furthermore, a user can add and remove tags, but only to their own repository.
-To enforce this, signing in with Github is required; the sign-in link is on the
-navbar.
+list of tags the user has applied to each repository is also available.
 
-Regardless of login, anyone can filter repositories by their tags using the
-search box on top of the repository list. Searching only one term shows all
-repositories with any tags that match that term; this is also the behavior
-for multiple terms, with one exception.
+### Managing tags
 
-If each of the terms exactly matches the name of an existing tag, then only
-repositories with all the included tags will be displayed. This means that the
-query `"javascript front-end framework"` will only return repositories tagged
-with all three of the `"javascript"`, `front-end`, and `framework` tags, while
+A user can add and remove tags on their own repository. To enforce this, signing
+in with Github is required; the sign-in link is on the navbar. The system manages
+which repositories have each tag on a per-user basis; that means that user A
+tagging the repository X with the tag "interesting" won't affect user B's tags
+of repository X. B can still see that A applied the tag.
+
+### Searching by tag
+
+Anyone can filter repositories by their tags using the search box on top of the
+repository list. The search term might be a prefix, infix or suffix of the tag
+name, or the entire name: searching for `"tes"` will match `"testing"`, `"doctest"`
+and `"kubernetes"`, as long as those tags exist in the database.
+
+Searching only one term shows all repositories with any matching tags. Multiple
+term search is generally equivalent to the union of the results of each
+individual term; searching for `"ruby doc"` will return the same repositories as
+`"ruby"`, plus those for `"doc"` (meaning, this includes `"docker"` and
+`"documentation"`).
+
+However, if each of the terms exactly matches the name of an existing tag, then
+only repositories with all the included tags will be displayed. This means that
+the query `"javascript front-end framework"` will only return repositories tagged
+with all three of the `"javascript"`, `"front-end"`, and `"framework"` tags, while
 the query `"javascr front framew"` would include repositories with *any* of
 these tags, according to the general search strategy.
+
+### Tag recommendations
+
+The first priority in recommendation goes to the most commonly applied tag in
+that repository. If the user already has that, priority then goes to the tag
+representing the language of the repository (or `"documentation"` if the language
+is not defined on Github).
+
+The fallback recommendation is the "favorite" tag; it is last in priority and
+it is the only one that gets recommended even if already applied to that
+repository.
 
 ## Linter
 

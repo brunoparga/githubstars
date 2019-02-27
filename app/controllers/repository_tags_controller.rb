@@ -6,7 +6,7 @@ class RepositoryTagsController < ApplicationController
                                      tag: set_tag,
                                      user: searched_user)
     @repo = Repository.find(params[:repository_id])
-    @recommendation = Recommendation.get(@repo)
+    @recommendation = Recommendation.get(@repo, searched_user)
   end
 
   def destroy

@@ -27,7 +27,7 @@ class RepositoriesController < ApplicationController
 
     def recommend(repos)
       repos_with_recommendations = repos.map do |repo|
-        { record: repo, recommendation: Recommendation.get(repo) }
+        { record: repo, recommendation: Recommendation.get(repo, searched_user) }
       end
       repos_with_recommendations
     end

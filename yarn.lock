@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@rails/webpacker@3.5":
+"@rails/webpacker@3.5.5":
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-3.5.5.tgz#8911c66bcefc8bc6b91270e92f0d39e3c2d43116"
   integrity sha512-R9kglLb/R9mMqf2BW91XJHYc0q00qAO67vfrbV52ifTSywPOixEka/7oU3cb6671u1ajd74kuGAsCSnBtdVHJg==
@@ -2152,7 +2152,7 @@ dredd-transactions@6.5.2:
     fury-adapter-swagger "0.23.2"
     uri-template "1.0.1"
 
-dredd@^8.0.3:
+dredd@8.0.3:
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/dredd/-/dredd-8.0.3.tgz#872852b86147e564eb5aa3f788e94d3dc04de480"
   integrity sha512-IHexrgpJuFYVY6x908jmQM2e5PPCGAWDf/7biAVrMOcJlxo+XN6SmvoKByEaxfiCjmQ2f7XLpHLUCJL9Polmhw==

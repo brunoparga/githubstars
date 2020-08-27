@@ -2,8 +2,8 @@
   "name": "githubstars",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5",
-    "dredd": "^8.0.3"
+    "@rails/webpacker": "3.5.5",
+    "dredd": "8.0.3"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"

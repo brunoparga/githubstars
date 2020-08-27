@@ -49,7 +49,7 @@ group :development, :test do
   # Pry - very useful for debugging
   gem "pry-byebug"
   # RSpec test framework
-  gem "rspec-rails", "~> 3.8"
+  gem "rspec-rails", "~> 4.0"
 end
 
 group :development do

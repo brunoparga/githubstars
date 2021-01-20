@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.5.3"
+ruby "2.6.6"
 
 # Rubocop linter, configured with Rails standards
 gem "rubocop-rails_config"
